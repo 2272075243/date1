@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app" >
+        <!-- <h1>{{article.title}}</h1>
+        <h2>作者：{{article.author}}</h2>
+        <h3>{{article.publishDate}}</h3>
+        <p>
+            <img: src="article.imgSrc" style="width:100px;height:50px"/>
+           {{article.content}}
+        </p> -->
+        <!-- heart是组件的一个属性，组件必须通过props声明此属性 -->
+        <!-- <zn v-bind:heart="article"></zn>
+        <zn v-bind:heart="article2"></zn> -->
+        <zn v-for="article in articleList" :key="article.title" :heart="article"></zn>
+     </div>
+    <script>
+        //定义zn这个自定义组件
+        //第一个参数自定义组件的名称，第二个是定义该组件的运行规则对象
+        Vue.component('zn',{
+            props:['heart'],
+            //template中定义顶是组件的模板，即html和{{}}以及vue指令的组合
+            //template必须要有根标签 如 <h1><h2>不合法，<div><h1></h1><h2></h2></div>合法
+            template:'〈div>'+
+                '<h1>{{heart.title}}</h1>'+
+                '<h2>作者：{{heart.author}}</h2>'+
+                '<h3>时间：{{heart.publishDate}}</h3>'+
+                '<p>{{heart.content}}</p>'+
+            '</div>'
+        });
+        var app=new Vue({
+            el:"#app",
+            data:{
+                articleList:[
+                {
+                    title:"论。。。",
+                    author:"王",
+                    publishDate:"2019-12-11",
+                    content:" afhgsfwjitujqwmngqhikgwlmedqwgyfgbqjdoqksomdcqhdj",
+                },
+                {
+                    title:"vue笔记",
+                    author:"王",
+                    publishDate:"2019-12-11",
+                    content:" vue是前端框架",
+                },
+                {
+                    title:"笔记",
+                    author:"哈",
+                    publishDate:"2019-12-11",
+                    content:"前端框架",
+                }                      
+            ]
+            }
+        })
+    </script>
+</body>
+</html>
